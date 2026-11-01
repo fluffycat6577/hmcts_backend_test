@@ -24,7 +24,7 @@ namespace hmcts_test.endpoints.handlers
             {
                 Title = task.Title,
                 Description = task.Description,
-                Status = (model.TaskStatus) task.Status,
+                Status = task.Status,
                 DueDate = task.DueDate
             };
 
