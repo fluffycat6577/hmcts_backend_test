@@ -7,7 +7,7 @@ namespace hmcts_test.endpoints
     {
         public static IEndpointRouteBuilder MapTaskEndpoints(this IEndpointRouteBuilder routes)
         {
-            var group = routes.MapGroup("/Task").WithTags("Task");
+            var group = routes.MapGroup("/task").WithTags("Task");
 
             group.MapGet("/", TaskHandler.GetHandle).WithName("GetAllTasks").Produces<List<model.Task>>(StatusCodes.Status200OK);
             group.MapGet("/{id}", TaskHandler.GetByIdHandle).WithName("GetTaskById").Produces<model.Task>(StatusCodes.Status200OK).Produces(StatusCodes.Status404NotFound);
