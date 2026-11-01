@@ -1,0 +1,18 @@
+﻿namespace hmcts_test.controller
+{
+    public record TaskDTO
+    {
+        public required string Title { get; init; }
+        public string? Description { get; init; }
+        public required TaskStatus Status { get; init; }
+        public required DateTime DueDate { get; init; }
+    }
+
+    public record UpdateTaskDTO
+    {
+        public string? Title { get; init; }
+        public string? Description { get; init; }
+        public TaskStatus? Status { get; init; }
+        public DateTime? DueDate { get; init; }
+    }
+}
