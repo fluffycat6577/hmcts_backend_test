@@ -4,10 +4,17 @@ namespace hmcts_test.controller
 {
     public record TaskDTO
     {
+        public int Id { get; init; }
         public required string Title { get; init; }
         public string? Description { get; init; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public required model.TaskStatus Status { get; init; }
+        public required string Status { get; init; }
+        public required DateTime DueDate { get; init; }
+    }
+    public record CreateTaskDTO
+    {
+        public required string Title { get; init; }
+        public string? Description { get; init; }
+        public required string Status { get; init; }
         public required DateTime DueDate { get; init; }
     }
 
@@ -15,8 +22,7 @@ namespace hmcts_test.controller
     {
         public string? Title { get; init; }
         public string? Description { get; init; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public model.TaskStatus? Status { get; init; }
+        public string? Status { get; init; }
         public DateTime? DueDate { get; init; }
     }
 }

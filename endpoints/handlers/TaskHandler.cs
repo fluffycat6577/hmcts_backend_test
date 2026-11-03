@@ -8,7 +8,17 @@ namespace hmcts_test.endpoints.handlers
     {
         public static async Task<IResult> GetHandle(TaskContext db)
         {
-            var tasks = await db.Tasks.ToListAsync();
+            var tasks = await db.Tasks
+                .Select(t => new TaskDTO
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    Status = t.Status.ToString(),
+                    DueDate = t.DueDate
+                })
+                .ToListAsync();
+
             return Results.Ok(tasks);
         }
 
@@ -18,13 +28,28 @@ namespace hmcts_test.endpoints.handlers
             return task is not null ? Results.Ok(task) : Results.NotFound();
         }
 
-        public static async Task<IResult> CreateHandle(TaskDTO task, TaskContext db)
+        public static async Task<IResult> CreateHandle(CreateTaskDTO task, TaskContext db)
         {
+            if (task is null)
+            {
+                return Results.BadRequest();
+            }
+
+            if (!Enum.TryParse<model.TaskStatus>(task.Status, out var status))
+            {
+                return Results.BadRequest("Invalid task status.");
+            }
+
+            if (!Enum.IsDefined(typeof(model.TaskStatus), status))
+            {
+                return Results.BadRequest("Invalid task status.");
+            }
+
             var newTask = new model.Task
             {
                 Title = task.Title,
                 Description = task.Description,
-                Status = task.Status,
+                Status = status,
                 DueDate = task.DueDate
             };
 
@@ -42,7 +67,24 @@ namespace hmcts_test.endpoints.handlers
             }
             existingTask.Title = task.Title ?? existingTask.Title;
             existingTask.Description = task.Description ?? existingTask.Description;
-            existingTask.Status = task.Status.HasValue ? (model.TaskStatus)task.Status.Value : existingTask.Status;
+
+            if (task.Status is not null)
+            {
+                if (!Enum.TryParse<model.TaskStatus>(task.Status, out var status))
+                {
+                    return Results.BadRequest("Invalid task status.");
+                }
+                if (!Enum.IsDefined(typeof(model.TaskStatus), status))
+                {
+                    return Results.BadRequest("Invalid task status.");
+                }
+                existingTask.Status = status;
+            }
+            else
+            {
+                existingTask.Status = existingTask.Status;
+            }
+
             existingTask.DueDate = task.DueDate ?? existingTask.DueDate;
             await db.SaveChangesAsync();
             return Results.Ok(existingTask);
