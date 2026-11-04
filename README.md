@@ -29,9 +29,6 @@ POST requests to the /task endpoint require a JSON body with the following struc
   "dueDate": "2024-06-30T00:00:00Z"
 }
 ```
-Note that the all fields except "description" must be non-null. Should the "status" field be null, it will default to "Pending".
+Note that the all fields except "description" must be non-null. Additionally, the "status" field must correspond exactly to one of the enum types defined by TaskStatus. Requests can either be the string representation or the numerical value.
 
 As for PUT requests, the JSON body must have the same structure as above, but all fields are optional. Please note that while tasks also have an ID value, this is automatically tracked and updated by Entity Framework Core and as such does not need to be set in either request.
-
-### Frontend Application
-Not Yet Implemented
