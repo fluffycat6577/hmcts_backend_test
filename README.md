@@ -1,6 +1,6 @@
 # DTS Developer Technical Test
 ## Introduction
-This repository contains all the data related to this candidates implementation of the DTS Developer Technical Test. It has been anonymized to remove any potential traces of the candidates identity for blind evaluation.
+This repository contains all the data related to this candidates implementation of the backend server for the DTS Developer Technical Test.
 
 ## Technical Notes
 ### Backend API
