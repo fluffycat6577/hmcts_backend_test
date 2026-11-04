@@ -25,7 +25,15 @@ namespace hmcts_test.endpoints.handlers
         public static async Task<IResult> GetByIdHandle(int id, TaskContext db)
         {
             var task = await db.Tasks.FindAsync(id);
-            return task is not null ? Results.Ok(task) : Results.NotFound();
+            var taskDTO = task is not null ? new TaskDTO
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+                Status = task.Status.ToString(),
+                DueDate = task.DueDate
+            } : null;
+            return taskDTO is not null ? Results.Ok(taskDTO) : Results.NotFound();
         }
 
         public static async Task<IResult> CreateHandle(CreateTaskDTO task, TaskContext db)
