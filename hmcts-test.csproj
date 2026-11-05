@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -15,7 +15,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-	<Compile Remove="hmctsBackend.Tests/**/*.cs" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="hmctsBackend.Tests/**/*.cs" />
+		<Content Remove="hmctsBackend.Tests/**/*" />
+		<None Remove="hmctsBackend.Tests/**/*" />
+	</ItemGroup>
 
 </Project>
