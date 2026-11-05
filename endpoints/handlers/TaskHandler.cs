@@ -63,7 +63,7 @@ namespace hmcts_test.endpoints.handlers
 
             db.Tasks.Add(newTask);
             await db.SaveChangesAsync();
-            return Results.Created($"/Task/{newTask.Id}", newTask);
+            return Results.Created($"/task/{newTask.Id}", newTask);
         }
 
         public static async Task<IResult> UpdateHandle(int id, UpdateTaskDTO task, TaskContext db)
