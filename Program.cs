@@ -13,3 +13,5 @@ var app = builder.Build();
 app.MapTaskEndpoints();
 
 app.Run();
+
+public partial class Program { } // Expose Program class for integration testing
