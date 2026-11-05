@@ -11,6 +11,42 @@ The backend API is implemented using .NET 10.0 and is written in C#, specificall
 
 These provide the necessary functionality for application routing and database access respectively.
 
+### Installation
+To install the backend API after downloading/cloning the project, follow these steps:
+
+- Open a terminal and navigate to the root directory of the project.
+- Run the following command to restore the necessary dependencies:
+```bash
+dotnet restore
+```
+- Run the following command to build the project:
+```bash
+dotnet build
+```
+- Create a new database folder in the root directory of the project:
+```bash
+mkdir db
+```
+- If necessary, install the .NET Entity Framework Core tools by running the following command:
+```bash
+dotnet tool install --global dotnet-ef
+```
+- Then, run the following command to create the database and apply any migrations:
+```bash
+dotnet ef database update
+```
+
+Following these steps, the backend API should be ready to run. To start the server, run the following command:
+```bash
+dotnet run
+```
+
+### Testing
+This project uses XUnit for unit testing. To run the tests, execute the following command in the terminal from the projects root directory:
+```bash
+dotnet test
+```
+
 #### API Endpoints
 The following endpoints are available for use:
 
