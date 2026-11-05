@@ -9,8 +9,8 @@ namespace hmcts_test.endpoints
         {
             var group = routes.MapGroup("/task").WithTags("Task");
 
-            group.MapGet("/", TaskHandler.GetHandle).WithName("GetAllTasks").Produces<List<model.Task>>(StatusCodes.Status200OK);
-            group.MapGet("/{id}", TaskHandler.GetByIdHandle).WithName("GetTaskById").Produces<model.Task>(StatusCodes.Status200OK).Produces(StatusCodes.Status404NotFound);
+            group.MapGet("/", TaskHandler.GetHandle).WithName("GetAllTasks").Produces<List<TaskDTO>>(StatusCodes.Status200OK);
+            group.MapGet("/{id}", TaskHandler.GetByIdHandle).WithName("GetTaskById").Produces<TaskDTO>(StatusCodes.Status200OK).Produces(StatusCodes.Status404NotFound);
             group.MapPost("/", TaskHandler.CreateHandle).WithName("CreateTask").Accepts<CreateTaskDTO>("application/json").Produces<model.Task>(StatusCodes.Status201Created);
             group.MapPut("/{id}", TaskHandler.UpdateHandle).WithName("UpdateTask").Accepts<UpdateTaskDTO>("application/json").Produces<model.Task>(StatusCodes.Status200OK).Produces(StatusCodes.Status404NotFound);
             group.MapDelete("/{id}", TaskHandler.DeleteHandle).WithName("DeleteTask").Produces(StatusCodes.Status204NoContent).Produces(StatusCodes.Status404NotFound);
